@@ -845,29 +845,29 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
-                    { label: "武器魔力付与 合算", val: 37.5, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
-                    { label: "エクサ再錬効果", val: 8, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
-                    { label: "レアバセット効果", val: 6, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
-                    { label: "レアバアクセ効果", val: 9, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
-                    { label: "エルコレ効果", val: 3.75, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
-                    { label: "オプション変換効果", val: 12, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
-                    { label: "スキリン[固定効果]", val: 0.5, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
-                    { label: "ペットパッシブ", val: 2, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
-                    { label: "アーティファクト成長1段階", val: 3, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
-                    { label: "シナジー", val: 1, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
+                    { label: "武器魔力付与 合算", val: 37.5, fixed: true, edit: true, on: true, imgUrl: "./images/maryoku.png" },
+                    { label: "エクサ再錬効果", val: 8, fixed: true, edit: true, on: true, imgUrl: "./images/ekusa.png" },
+                    { label: "レアバセット効果", val: 6, fixed: true, edit: true, on: true, imgUrl: "./images/sinen.png" },
+                    { label: "レアバアクセ効果", val: 9, fixed: true, edit: true, on: true, imgUrl: "./images/reabakouka.png" },
+                    { label: "エルコレ効果", val: 3.75, fixed: true, edit: true, on: true, imgUrl: "./images/erukore.png" },
+                    { label: "オプション変換効果", val: 12, fixed: true, edit: true, on: true, imgUrl: "./images/buki.png" },
+                    { label: "スキリン[固定効果]", val: 0.5, fixed: true, edit: false, on: true, imgUrl: "./images/sukiru.png" },
+                    { label: "ペットパッシブ", val: 2, fixed: true, edit: false, on: true, imgUrl: "./images/pet.png" },
+                    { label: "アーティファクト成長1段階", val: 3, fixed: true, edit: false, on: true, imgUrl: "./images/arti.png" },
+                    { label: "シナジー", val: 1, fixed: true, edit: false, on: true, imgUrl: "./images/shinagi.png" },
                 ]
             },
             {
                 id: "cri_dmg",
                 name: "クリティカルダメージ",
-                customImage: "",
+                customImage: "./images/header_cri.png",
                 calcType: "crit",
                 items: [
                     { label: "ステ表記", val: 215.00, type: "stat_window", fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
                     { label: "加算パッシブ", val: 0, type: "add", fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
                     { label: "乗算パッシブ", val: 0, type: "multi", fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
                     { label: "アットマ草木", val: 26, type: "multi", fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
-                    { label: "エクサ赤セット", val: 10, type: "multi", fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
+                    { label: "エクサ赤セット", val: 10, type: "multi", fixed: true, edit: false, on: true, imgUrl: "./images/ekusa.png" },
                     { label: "刻印", val: 5, type: "multi", fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
                     { label: "マエストロヘイロー", val: 2, type: "multi", fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
                 ]
@@ -875,7 +875,7 @@
             {
                 id: "boss_dmg",
                 name: "ボスに与えるダメージ増加",
-                customImage: "",
+                customImage: "./images/header_boss.png",
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
@@ -888,7 +888,7 @@
             {
                 id: "all_skill",
                 name: "全てのスキルダメージ増加",
-                customImage: "",
+                customImage: "./images/header_all.png",
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
@@ -898,7 +898,7 @@
             {
                 id: "trans_skill",
                 name: "強烈、超越スキルダメージ増加",
-                customImage: "",
+                customImage: "./images/header_trans.png",
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
@@ -908,7 +908,7 @@
             {
                 id: "polar",
                 name: "両極化：攻撃/受けるダメージ増加",
-                customImage: "",
+                customImage: "./images/header_polar.png",
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
@@ -918,37 +918,37 @@
             {
                 id: "dot",
                 name: "与えたダメージのn%を追加持続ダメージ",
-                customImage: "",
+                customImage: "./images/header_dot.png",
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
                     { label: "エクサ上衣回路", val: 12.00, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
                     { label: "エクサチップ", val: 12.00, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
                     { label: "アットマ上アクセ", val: 5.00, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
-                    { label: "レアバセット効果", val: 12.00, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
+                    { label: "レアバセット効果", val: 12.00, fixed: true, edit: true, on: true, imgUrl: "./images/sinen.png" },
                     { label: "レアバ武器効果", val: 5.00, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
-                    { label: "レアバアクセ効果", val: 7.00, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
-                    { label: "オプション変換効果", val: 12.00, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
+                    { label: "レアバアクセ効果", val: 7.00, fixed: true, edit: true, on: true, imgUrl: "./images/reabakouka.png" },
+                    { label: "オプション変換効果", val: 12.00, fixed: true, edit: true, on: true, imgUrl: "./images/buki.png" },
                     { label: "レイド3点セット効果", val: 5.00, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
                     { label: "リンクアバ効果", val: 2.00, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
-                    { label: "シナジー：歪曲", val: 2.00, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
+                    { label: "シナジー：歪曲", val: 2.00, fixed: true, edit: false, on: true, imgUrl: "./images/shinagi.png" },
                 ]
             },
             {
                 id: "hp100_under",
                 name: "HP100％以下の敵を攻撃時、ダメージ増加",
-                customImage: "",
+                customImage: "./images/header_hp.png",
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
-                    { label: "レアバセット効果", val: 10, fixed: true, edit: true, on: true, imgUrl: defaultImgUrl },
+                    { label: "レアバセット効果", val: 10, fixed: true, edit: true, on: true, imgUrl: "./images/sinen.png" },
                     { label: "武器効果", val: 5, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
                 ]
             },
             {
                 id: "hp50_over",
                 name: "HP50％超過の敵を攻撃時、ダメージ増加",
-                customImage: "",
+                customImage: "./images/header_hp.png",
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
@@ -959,7 +959,7 @@
             {
                 id: "hp50_under",
                 name: "HP50％以下の敵を攻撃時、ダメージ増加",
-                customImage: "",
+                customImage: "./images/header_hp.png",
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
@@ -970,7 +970,7 @@
             {
                 id: "hp30",
                 name: "HP30％以下の敵を攻撃時、ダメージ増加",
-                customImage: "",
+                customImage: "./images/header_hp.png",
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
@@ -1004,11 +1004,11 @@
 
         // --- データ永続化 (LocalStorage) ---
         function saveState() {
-            localStorage.setItem('elsword_calc_state_v2', JSON.stringify(appState));
+            localStorage.setItem('elsword_calc_state_v5', JSON.stringify(appState));
         }
 
         function loadState() {
-            const saved = localStorage.getItem('elsword_calc_state_v2');
+            const saved = localStorage.getItem('elsword_calc_state_v5');
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
