@@ -763,6 +763,153 @@
             line-height: 1.2;
             padding-left: 5px;
         }
+
+        /* ▼▼ 追加するCSS（スマホ最適化） ▼▼ */
+        @media (max-width: 600px) {
+
+            /* --- 全体の余白調整 --- */
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                width: 100%;
+            }
+
+            /* --- ヘッダー周り --- */
+            header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .tab-container {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            /* 比較情報の配置調整 */
+            div[style*="display:flex; align-items:center;"] {
+                flex-direction: column;
+                align-items: flex-end;
+                width: 100%;
+                gap: 10px;
+            }
+
+            .compare-info {
+                text-align: right;
+                margin-right: 0;
+                font-size: 0.8rem;
+            }
+
+            /* --- リスト・入力行のスマホ化（2段組み） --- */
+            /* グリッドを解除してフレックスボックスへ */
+            .breakdown-row,
+            .breakdown-row.crit,
+            .breakdown-row.simple,
+            .breakdown-row.toggle-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 10px 5px;
+                border-bottom: 1px solid #222;
+                /* 行の区切り線を追加 */
+                height: auto;
+            }
+
+            /* 名前・アイコン・説明エリアを上段100%に */
+            .name-container {
+                width: 100%;
+                margin-bottom: 5px;
+                order: 1;
+                /* 1番目 */
+            }
+
+            /* 名前入力欄の文字サイズ確保 */
+            .breakdown-row input[type="text"] {
+                font-size: 16px;
+                /* iOSズーム防止 */
+            }
+
+            /* 入力欄、セレクトボックス、スイッチ等を下段へ */
+            .breakdown-row>input[type="number"],
+            .breakdown-row>select,
+            .breakdown-row>.unit-label,
+            .breakdown-row>.type-label,
+            .switch-container {
+                order: 2;
+                /* 2番目（下段） */
+            }
+
+            /* 数値入力欄を大きく、押しやすく */
+            .breakdown-row input[type="number"] {
+                width: 80px;
+                height: 36px;
+                font-size: 16px;
+                /* iOSズーム防止 */
+                padding: 0 8px;
+            }
+
+            /* セレクトボックス調整 */
+            .breakdown-row select {
+                height: 36px;
+                font-size: 14px;
+            }
+
+            /* 削除ボタンを右端に飛ばす */
+            .remove-btn {
+                margin-left: auto;
+                order: 3;
+                width: 36px;
+                height: 36px;
+                line-height: 34px;
+            }
+
+            .remove-placeholder {
+                display: none;
+                /* 固定項目のプレースホルダーは消す */
+            }
+
+            /* --- 項目ヘッダー（バー）の調整 --- */
+            .header-content {
+                padding-right: 0;
+            }
+
+            .stat-name {
+                font-size: 0.85rem;
+            }
+
+            .meta-group {
+                flex-direction: column;
+                /* 合計と効率を縦に積む */
+                align-items: flex-end;
+                gap: 2px;
+            }
+
+            .spacer {
+                display: none;
+            }
+
+            /* スペーサー削除 */
+            .label-text {
+                display: none;
+            }
+
+            /* "合計:" などのラベルを消して数値だけ強調 */
+            .val-text {
+                font-size: 0.9rem;
+            }
+
+            .eff-text {
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 
@@ -1032,11 +1179,11 @@
 
         // --- データ永続化 (LocalStorage) ---
         function saveState() {
-            localStorage.setItem('elsword_calc_state_v24', JSON.stringify(appState));
+            localStorage.setItem('elsword_calc_state_v25', JSON.stringify(appState));
         }
 
         function loadState() {
-            const saved = localStorage.getItem('elsword_calc_state_v24');
+            const saved = localStorage.getItem('elsword_calc_state_v25');
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
