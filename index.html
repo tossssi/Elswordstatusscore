@@ -871,17 +871,17 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png", desc: "" },
-                    { label: "武器魔力付与 合算", val: 37.5, fixed: true, edit: true, on: true, imgUrl: "./images/maryoku.png", desc: "青+黄+巨大(物理6％1カ所)=37.5％" },
-                    { label: "エクサ再錬効果", val: 8, fixed: true, edit: true, on: true, imgUrl: "./images/ekusa.png" },
-                    { label: "レアバセット効果", val: 6, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png" },
+                    { label: "武器魔力付与", val: 37.5, fixed: true, edit: true, on: true, imgUrl: "./images/maryoku.png", desc: "青(2％)+黄(2%)+巨大(6％1カ所)=37.5％" },
+                    { label: "エクサ再錬効果", val: 8, fixed: true, edit: true, on: true, imgUrl: "./images/ekusa.png", desc: "再錬15段階×4カ所" },
+                    { label: "レアバセット効果", val: 6, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png", desc: "深淵3set,クレスト3set等" },
                     { label: "レアバアクセ[固定効果]", val: 4, fixed: true, edit: true, on: true, imgUrl: "./images/reabakouka.png", desc: "猛虎指輪,オーロラネックレス等" },
                     { label: "一般アクセ[追加効果]", val: 5, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png", desc: "アットマアクセ鑑定効果等" },
                     { label: "スキリン[固定効果]", val: 0.5, fixed: true, edit: false, on: true, imgUrl: "./images/sukiru.png" },
-                    { label: "エルコレ効果", val: 3.75, fixed: true, edit: true, on: true, imgUrl: "./images/erukore.png" },
                     { label: "オプション変換効果", val: 12, fixed: true, edit: true, on: true, imgUrl: "./images/buki.png" },
                     { label: "ペットパッシブ", val: 2, fixed: true, edit: false, on: true, imgUrl: "./images/pet.png" },
                     { label: "アーティファクト成長1段階", val: 3, fixed: true, edit: false, on: true, imgUrl: "./images/arti.png" },
-                    { label: "シナジー", val: 1, fixed: true, edit: false, on: true, imgUrl: "./images/shinagi.png" },
+                    { label: "エルコレ効果", val: 3.75, fixed: true, edit: true, on: true, imgUrl: "./images/erukore.png" },
+                    { label: "シナジー", val: 1, fixed: true, edit: false, on: true, imgUrl: "./images/shinagi.png", desc: "物理特化,魔法特化" },
                 ]
             },
             {
@@ -893,7 +893,7 @@
                     { label: "ステータス表記", val: 215.00, type: "stat_window", fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
                     { label: "加算パッシブ", val: 0, type: "add", fixed: true, edit: true, on: true, imgUrl: "./images/kasankuri.png" },
                     { label: "乗算パッシブ", val: 0, type: "multi", fixed: true, edit: true, on: true, imgUrl: "./images/josan.png" },
-                    { label: "アットマ草木", val: 26, type: "multi", fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
+                    { label: "アットマ草木セット効果", val: 26, type: "multi", fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
                     { label: "エクサ赤セット", val: 10, type: "multi", fixed: true, edit: false, on: true, imgUrl: "./images/ekusa.png" },
                     { label: "刻印", val: 5, type: "multi", fixed: true, edit: false, on: true, imgUrl: "./images/kokuin.png" },
                     { label: "マエストロヘイロー", val: 2, type: "multi", fixed: true, edit: false, on: true, imgUrl: "./images/maesuto.png" },
@@ -954,11 +954,11 @@
                     { label: "アットマ上衣アクセ[固定効果]", val: 5.00, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
                     { label: "レアバセット効果", val: 12.00, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png" },
                     { label: "レアバ武器[固定効果]", val: 5.00, fixed: true, edit: true, on: true, imgUrl: "./images/reabuki.png" },
-                    { label: "レアバアクセ効果", val: 7.00, fixed: true, edit: true, on: true, imgUrl: "./images/reabakouka.png" },
+                    { label: "レアバアクセ効果", val: 7.00, fixed: true, edit: true, on: true, imgUrl: "./images/zizoku.png" },
                     { label: "オプション変換効果", val: 12.00, fixed: true, edit: true, on: true, imgUrl: "./images/buki.png" },
                     { label: "レイド3点セット効果", val: 5.00, fixed: true, edit: false, on: true, imgUrl: "./images/set.png" },
                     { label: "リンクアバ効果", val: 2.00, fixed: true, edit: false, on: true, imgUrl: "./images/rinku.png" },
-                    { label: "シナジー：歪曲", val: 2.00, fixed: true, edit: false, on: true, imgUrl: "./images/shinagi.png" },
+                    { label: "シナジー", val: 2.00, fixed: true, edit: false, on: true, imgUrl: "./images/shinagizizoku.png", desc: "歪曲された視線" },
                 ]
             },
             {
@@ -969,7 +969,8 @@
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
                     { label: "レアバセット効果", val: 10, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png" },
-                    { label: "武器効果", val: 5, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
+                    { label: "レアバ武器[固定効果]", val: 5, fixed: true, edit: false, on: true, imgUrl: "./images/reabuki.png" },
+                    { label: "アットマ上衣アクセ[固定効果]", val: 0, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
                 ]
             },
             {
@@ -1031,11 +1032,11 @@
 
         // --- データ永続化 (LocalStorage) ---
         function saveState() {
-            localStorage.setItem('elsword_calc_state_v17', JSON.stringify(appState));
+            localStorage.setItem('elsword_calc_state_v23', JSON.stringify(appState));
         }
 
         function loadState() {
-            const saved = localStorage.getItem('elsword_calc_state_v17');
+            const saved = localStorage.getItem('elsword_calc_state_v23');
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
