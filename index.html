@@ -969,7 +969,7 @@
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
                     { label: "レアバセット効果", val: 10, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png" },
-                    { label: "レアバ武器[固定効果]", val: 5, fixed: true, edit: false, on: true, imgUrl: "./images/reabuki.png" },
+                    { label: "武器効果", val: 5, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl },
                 ]
             },
             {
@@ -1001,7 +1001,7 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
-                    { label: "ソケット効果", val: 0, fixed: true, edit: false, on: true, imgUrl: defaultImgUrl }
+                    { label: "ソケット効果", val: 0, fixed: true, edit: false, on: true, imgUrl: "./images/hangeki.png" }
                 ]
             },
         ];
@@ -1031,11 +1031,11 @@
 
         // --- データ永続化 (LocalStorage) ---
         function saveState() {
-            localStorage.setItem('elsword_calc_state_v15', JSON.stringify(appState));
+            localStorage.setItem('elsword_calc_state_v16', JSON.stringify(appState));
         }
 
         function loadState() {
-            const saved = localStorage.getItem('elsword_calc_state_v15');
+            const saved = localStorage.getItem('elsword_calc_state_v16');
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
