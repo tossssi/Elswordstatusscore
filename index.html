@@ -874,8 +874,8 @@
                     { label: "武器魔力付与 合算", val: 37.5, fixed: true, edit: true, on: true, imgUrl: "./images/maryoku.png", desc: "青+黄+巨大(物理6％1カ所)=37.5％" },
                     { label: "エクサ再錬効果", val: 8, fixed: true, edit: true, on: true, imgUrl: "./images/ekusa.png" },
                     { label: "レアバセット効果", val: 6, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png" },
-                    { label: "レアバアクセ[固定効果]", val: 9, fixed: true, edit: true, on: true, imgUrl: "./images/reabakouka.png", desc: "猛虎指輪,オーロラネックレス等" },
-                    { label: "一般アクセ[追加効果]", val: 0, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png", desc: "アットマアクセ鑑定効果等" },
+                    { label: "レアバアクセ[固定効果]", val: 4, fixed: true, edit: true, on: true, imgUrl: "./images/reabakouka.png", desc: "猛虎指輪,オーロラネックレス等" },
+                    { label: "一般アクセ[追加効果]", val: 5, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png", desc: "アットマアクセ鑑定効果等" },
                     { label: "スキリン[固定効果]", val: 0.5, fixed: true, edit: false, on: true, imgUrl: "./images/sukiru.png" },
                     { label: "エルコレ効果", val: 3.75, fixed: true, edit: true, on: true, imgUrl: "./images/erukore.png" },
                     { label: "オプション変換効果", val: 12, fixed: true, edit: true, on: true, imgUrl: "./images/buki.png" },
@@ -890,7 +890,7 @@
                 customImage: "",
                 calcType: "crit",
                 items: [
-                    { label: "ステータス表記", val: 215.00, type: "stat_window", fixed: true, edit: true, on: true, imgUrl: "./images/kotei.png" },
+                    { label: "ステータス表記", val: 215.00, type: "stat_window", fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
                     { label: "加算パッシブ", val: 0, type: "add", fixed: true, edit: true, on: true, imgUrl: "./images/kasankuri.png" },
                     { label: "乗算パッシブ", val: 0, type: "multi", fixed: true, edit: true, on: true, imgUrl: "./images/josan.png" },
                     { label: "アットマ草木", val: 26, type: "multi", fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
@@ -906,7 +906,7 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
-                    { label: "ステータス表記", val: 150.00, fixed: true, edit: true, on: true, imgUrl: "./images/kotei.png" },
+                    { label: "ステータス表記", val: 150.00, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
                     { label: "加算パッシブ", val: 0.00, fixed: true, edit: true, on: true, imgUrl: "./images/kasanboss.png" },
                     { label: "ギルドスキル", val: 2.50, fixed: true, edit: true, on: true, imgUrl: "./images/guild.png" },
                     { label: "刻印", val: 5, fixed: true, edit: false, on: true, imgUrl: "./images/kokuin.png" },
@@ -919,7 +919,7 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
-                    { label: "ステータス表記", val: 104.50, fixed: true, edit: true, on: true, imgUrl: "./images/kotei.png" }
+                    { label: "ステータス表記", val: 104.50, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" }
                 ]
             },
             {
@@ -929,7 +929,7 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
-                    { label: "ステータス表記", val: 122.00, fixed: true, edit: true, on: true, imgUrl: "./images/kotei.png" }
+                    { label: "ステータス表記", val: 122.00, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" }
                 ]
             },
             {
@@ -939,7 +939,7 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
-                    { label: "ステータス表記", val: 53.70, fixed: true, edit: true, on: true, imgUrl: "./images/kotei.png" }
+                    { label: "ステータス表記", val: 53.70, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" }
                 ]
             },
             {
@@ -1031,11 +1031,11 @@
 
         // --- データ永続化 (LocalStorage) ---
         function saveState() {
-            localStorage.setItem('elsword_calc_state_v16', JSON.stringify(appState));
+            localStorage.setItem('elsword_calc_state_v17', JSON.stringify(appState));
         }
 
         function loadState() {
-            const saved = localStorage.getItem('elsword_calc_state_v16');
+            const saved = localStorage.getItem('elsword_calc_state_v17');
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
