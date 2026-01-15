@@ -910,13 +910,27 @@
             .eff-text {
                 font-size: 0.8rem;
             }
+
+            /* 魔法石パネルをスマホ向けに調整 */
+            .stone-panel-grid {
+                grid-template-columns: repeat(2, 1fr);
+                /* スマホでは2カラム */
+            }
         }
 
-        /* ▼▼ 追加するCSS（魔法石パネル用） ▼▼ */
+        /* タブレット向け調整 */
+        @media (min-width: 601px) and (max-width: 900px) {
+            .stone-panel-grid {
+                grid-template-columns: repeat(3, 1fr);
+                /* タブレットでは3カラム */
+            }
+        }
+
+        /* ▼▼ 追加するCSS(魔法石パネル用) ▼▼ */
         .stone-panel-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            /* レスポンシブグリッド */
+            grid-template-columns: repeat(5, 1fr);
+            /* 5カラムの固定グリッド */
             gap: 10px;
             margin-top: 20px;
             padding-top: 20px;
@@ -1220,6 +1234,7 @@
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
                     { label: "ステータス表記", val: 174.2, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
+                    { label: "狩りのデュアル魔法石", val: 0, stoneId: "boss25", unit: 2.5, imgUrl: "./images/kariisi.png", desc: "", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
                     { label: "力のアットマ魔法石", val: 0, stoneId: "boss3", unit: 3, imgUrl: "./images/ishitikara.png", desc: "", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
                     { label: "加算パッシブ", val: 0.00, fixed: true, edit: true, on: true, imgUrl: "./images/kasanboss.png" },
                     { label: "ギルドスキル", val: 2.50, fixed: true, edit: true, on: true, imgUrl: "./images/guild.png" },
@@ -1345,7 +1360,14 @@
             // 刻印をOFFに
             const kokuin = jiroBossDmg.items.find(i => i.label === '刻印');
             if (kokuin) kokuin.on = false;
-            // 魔法石の値を設定（6個 × 3% = 18）
+            // 狩りのデュアル魔法石の値を設定（16個 × 2.5% = 40）
+            const boss25Stone = jiroBossDmg.items.find(i => i.stoneId === 'boss25');
+            if (boss25Stone) {
+                boss25Stone.val = 40;
+                boss25Stone.currentCount = 16;
+                boss25Stone.targetCount = 16;
+            }
+            // 力のアットマ魔法石の値を設定（6個 × 3% = 18）
             const bossStone = jiroBossDmg.items.find(i => i.stoneId === 'boss3');
             if (bossStone) {
                 bossStone.val = 18;
@@ -1409,6 +1431,7 @@
             stoneCounts: {
                 // v37: 魔法石の個数をセット別に管理
                 boss3: { A: 0, B: 0 },
+                boss25: { A: 0, B: 0 },
                 skill2: { A: 0, B: 0 },
                 trans2: { A: 0, B: 0 },
                 trans25: { A: 0, B: 0 }
@@ -1449,6 +1472,7 @@
                         if (!appState.stoneCounts) {
                             appState.stoneCounts = {
                                 boss3: { A: 0, B: 0 },
+                                boss25: { A: 0, B: 0 },
                                 skill2: { A: 0, B: 0 },
                                 trans2: { A: 0, B: 0 },
                                 trans25: { A: 0, B: 0 }
@@ -1502,6 +1526,7 @@
             appState.activeSet = 'A';
             appState.stoneCounts = {
                 boss3: { A: 0, B: 0 },
+                boss25: { A: 0, B: 0 },
                 skill2: { A: 0, B: 0 },
                 trans2: { A: 0, B: 0 },
                 trans25: { A: 0, B: 0 }
@@ -1556,6 +1581,7 @@
                 // たいやき次郎の魔法石個数
                 appState.stoneCounts = {
                     boss3: { A: 6, B: 6 },
+                    boss25: { A: 16, B: 16 },
                     skill2: { A: 1, B: 1 },
                     trans2: { A: 3, B: 3 },
                     trans25: { A: 0, B: 0 }
@@ -1564,6 +1590,7 @@
                 // その他のプリセットは0にリセット
                 appState.stoneCounts = {
                     boss3: { A: 0, B: 0 },
+                    boss25: { A: 0, B: 0 },
                     skill2: { A: 0, B: 0 },
                     trans2: { A: 0, B: 0 },
                     trans25: { A: 0, B: 0 }
@@ -1658,6 +1685,7 @@
             container.innerHTML = '';
 
             const stones = [
+                { id: 'boss25', label: 'ボスダメ2.5%', unit: 2.5, img: './images/kariisi.png' },
                 { id: 'boss3', label: 'ボスダメ3%', unit: 3, img: './images/ishitikara.png' },
                 { id: 'skill2', label: '全スキル2%', unit: 2, img: './images/ishitikara.png' },
                 { id: 'trans2', label: '強烈超越2%', unit: 2, img: './images/ishikibin.png' },
@@ -1687,7 +1715,6 @@
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <div style="line-height:1.2; text-align:left;">
                         <div style="font-size:0.75rem; color:#ddd; font-weight:bold;">変更前</div>
-                        <div style="font-size:0.6rem; color:#888; margin-top: 4px;">(現在の装着個数)</div>
                     </div>
                     <div style="display:flex; align-items:center; gap:3px;">
                         <button class="stone-ctrl-btn" onclick="updateStoneCount('${stone.id}', 'A', ${countA - 1})">-</button>
@@ -1701,7 +1728,6 @@
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <div style="line-height:1.2; text-align:left;">
                         <div style="font-size:0.75rem; color:#fff; font-weight:bold;">変更後</div>
-                        <div style="font-size:0.6rem; color:#888; margin-top: 4px;">(目標装着個数)</div>
                     </div>
                     <div style="display:flex; align-items:center; gap:3px;">
                         <button class="stone-ctrl-btn" onclick="updateStoneCount('${stone.id}', 'B', ${countB - 1})">-</button>
