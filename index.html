@@ -1441,7 +1441,7 @@
         const rikatanCriDmg = rikatanStats.find(cat => cat.id === 'cri_dmg');
         if (rikatanCriDmg) {
             rikatanCriDmg.items.find(i => i.label === 'ステータス表記').val = 228.5;
-            rikatanCriDmg.items.find(i => i.label === '加算パッシブ').val = 0;
+            rikatanCriDmg.items.find(i => i.label === '加算パッシブ').val = 10;
             rikatanCriDmg.items.find(i => i.label === '乗算パッシブ').val = 0;
             rikatanCriDmg.items.find(i => i.label === 'アットマ草木セット効果').val = 26;
             // 刻印をOFFに
@@ -1488,7 +1488,7 @@
         // 5. 強烈、超越スキルダメージ増加のカスタマイズ
         const rikatanTransSkill = rikatanStats.find(cat => cat.id === 'trans_skill');
         if (rikatanTransSkill) {
-            rikatanTransSkill.items.find(i => i.label === 'ステータス表記').val = 126.3;
+            rikatanTransSkill.items.find(i => i.label === 'ステータス表記').val = 128.6;
             // 機敏のアットマ魔法石（2個 × 2% = 4）
             const trans2Stone = rikatanTransSkill.items.find(i => i.stoneId === 'trans2');
             if (trans2Stone) {
@@ -1545,6 +1545,9 @@
         if (rikatanHp50Under) {
             rikatanHp50Under.items.find(i => i.label === 'エクサ回路増幅効果').val = 9.6;
             rikatanHp50Under.items.find(i => i.label === 'エクサチップオプション').val = 0;
+            // シナジー（殴り合い）をOFFに
+            const shinagi = rikatanHp50Under.items.find(i => i.label === 'シナジー');
+            if (shinagi) shinagi.on = false;
         }
 
         // 11. HP30％以下の敵のカスタマイズ
