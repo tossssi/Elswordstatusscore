@@ -55,15 +55,14 @@
         }
 
         .help-btn {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--accent-cyan), #00b8cc);
             border: none;
             color: #000;
             font-weight: 800;
-            /* ExtraBold */
-            font-size: 1.2rem;
+            font-size: 1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -71,6 +70,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
             font-family: 'M PLUS Rounded 1c', sans-serif;
+            margin-left: 10px;
         }
 
         .help-btn:hover {
@@ -360,6 +360,7 @@
             font-size: 0.9rem;
             font-family: 'M PLUS Rounded 1c', sans-serif;
             transition: opacity 0.2s;
+            margin-right: 10px !important;
         }
 
         .breakdown-row select {
@@ -1021,19 +1022,59 @@
             font-size: 1.2rem;
             font-weight: bold;
         }
+
+        /* 数値入力欄の矢印（スピンボタン）削除 */
+        #stoneControlPanel input[type=number]::-webkit-inner-spin-button,
+        #stoneControlPanel input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        #stoneControlPanel input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        /* プリセットボタンエリア */
+        .preset-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 0 5px;
+        }
+
+        .preset-btn {
+            border: 1px solid #ffcc80;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 8px;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 0.85rem;
+            transition: transform 0.1s;
+            background: #ffe082;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            min-width: 140px;
+        }
+
+        .preset-btn:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 
 <body>
 
     <div class="container">
-        <div class="nav-area">
-            <button id="helpBtn" class="help-btn">?</button>
-        </div>
-
         <header>
             <div style="display:flex; flex-direction:column; align-items:flex-start;">
-                <h1>ELSWORDステータス効率計算</h1>
+                <div style="display:flex; align-items:center;">
+                    <h1>ELSWORDステータス効率計算</h1>
+                    <button id="helpBtn" class="help-btn">?</button>
+                </div>
                 <div class="tab-container">
                     <button id="btnSetA" class="tab-btn active" onclick="switchSet('A')">変更前</button>
                     <button id="btnSetB" class="tab-btn" onclick="switchSet('B')">変更後</button>
@@ -1057,6 +1098,16 @@
 
         <!-- 魔法石個数調整パネル -->
         <div id="stoneControlPanel" class="stone-panel-grid"></div>
+
+        <!-- プリセット読込ボタン -->
+        <div style="border-top: 2px dashed #333; margin-top: 20px; padding-top: 20px;">
+            <div class="preset-container">
+                <span style="font-size:0.8rem; color:#888; margin-right:10px;">プリセット読込</span>
+                <button class="preset-btn" onclick="loadPreset('jiro')">🐟たいやき次郎</button>
+                <button class="preset-btn" onclick="loadPreset('fuyuru')">❄️ふゆるです</button>
+                <button class="preset-btn" onclick="loadPreset('rikatan')">🎀りかたん</button>
+            </div>
+        </div>
     </div>
 
     <!-- Help Modal -->
@@ -1134,8 +1185,8 @@
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png", desc: "" },
                     { label: "オプション変換効果", val: 12, fixed: true, edit: true, on: true, imgUrl: "./images/buki.png" },
                     { label: "武器魔力付与", val: 37.5, fixed: true, edit: true, on: true, imgUrl: "./images/maryoku.png", desc: "青(2％)+黄(2%)+巨大(6％1カ所)=37.5％" },
-                    { label: "レアバセット効果", val: 6, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png", desc: "深淵3set,クレスト3set等" },
-                    { label: "レアバアクセ[固定効果]", val: 4, fixed: true, edit: true, on: true, imgUrl: "./images/reabakouka.png", desc: "猛虎指輪,オーロラネックレス等" },
+                    { label: "レアバセット効果", val: 6, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png", desc: "深淵3set=7%、クレスト3set=6%" },
+                    { label: "レアバアクセ[固定効果]", val: 4, fixed: true, edit: true, on: true, imgUrl: "./images/reabakouka.png", desc: "猛虎指輪=3%　オートマタネックレス=1%" },
                     { label: "一般アクセ[追加効果]", val: 5, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png", desc: "アットマアクセ鑑定効果等" },
                     { label: "スキリン[固定効果]", val: 0.5, fixed: true, edit: false, on: true, imgUrl: "./images/sukiru.png" },
                     { label: "エルコレ効果", val: 3.75, fixed: true, edit: true, on: true, imgUrl: "./images/erukore.png" },
@@ -1154,7 +1205,7 @@
                     { label: "ステータス表記", val: 215.00, type: "stat_window", fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
                     { label: "加算パッシブ", val: 0, type: "add", fixed: true, edit: true, on: true, imgUrl: "./images/kasankuri.png" },
                     { label: "乗算パッシブ", val: 0, type: "multi", fixed: true, edit: true, on: true, imgUrl: "./images/josan.png" },
-                    { label: "アットマ草木セット効果", val: 26, type: "multi", fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
+                    { label: "アットマ草木セット効果", val: 26, type: "multi", fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png", desc: "エリート=26%　ユニーク=30%" },
                     { label: "エクサ赤セット", val: 10, type: "multi", fixed: true, edit: false, on: true, imgUrl: "./images/ekusa.png" },
                     { label: "刻印", val: 5, type: "multi", fixed: true, edit: false, on: true, imgUrl: "./images/kokuin.png" },
                     { label: "マエストロヘイロー", val: 2, type: "multi", fixed: true, edit: false, on: true, imgUrl: "./images/maesuto.png" },
@@ -1167,8 +1218,8 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
-                    { label: "ステータス表記", val: 150.00, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
-                    { label: "力のアットマ魔法石", val: 0, stoneId: "boss3", unit: 3, imgUrl: "./images/ishitikara.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
+                    { label: "ステータス表記", val: 174.2, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
+                    { label: "力のアットマ魔法石", val: 0, stoneId: "boss3", unit: 3, imgUrl: "./images/ishitikara.png", desc: "", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
                     { label: "加算パッシブ", val: 0.00, fixed: true, edit: true, on: true, imgUrl: "./images/kasanboss.png" },
                     { label: "ギルドスキル", val: 2.50, fixed: true, edit: true, on: true, imgUrl: "./images/guild.png" },
                     { label: "刻印", val: 5, fixed: true, edit: false, on: true, imgUrl: "./images/kokuin.png" },
@@ -1181,8 +1232,8 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
-                    { label: "ステータス表記", val: 104.50, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
-                    { label: "力のアットマ魔法石", val: 0, stoneId: "skill2", unit: 2, imgUrl: "./images/ishitikara.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 }
+                    { label: "ステータス表記", val: 106.5, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
+                    { label: "力のアットマ魔法石", val: 0, stoneId: "skill2", unit: 2, imgUrl: "./images/ishitikara.png", desc: "", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 }
                 ]
             },
             {
@@ -1192,9 +1243,9 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
-                    { label: "ステータス表記", val: 122.00, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
-                    { label: "機敏のアットマ魔法石", val: 0, stoneId: "trans2", unit: 2, imgUrl: "./images/ishikibin.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
-                    { label: "知恵のアットマ魔法石", val: 0, stoneId: "trans25", unit: 2.5, imgUrl: "./images/ishitie.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
+                    { label: "ステータス表記", val: 128.6, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
+                    { label: "機敏のアットマ魔法石", val: 0, stoneId: "trans2", unit: 2, imgUrl: "./images/ishikibin.png", desc: "", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
+                    { label: "知恵のアットマ魔法石", val: 0, stoneId: "trans25", unit: 2.5, imgUrl: "./images/ishitie.png", desc: "", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
                 ]
             },
             {
@@ -1214,13 +1265,13 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
-                    { label: "オプション変換効果", val: 12.00, fixed: true, edit: true, on: true, imgUrl: "./images/buki.png" },
-                    { label: "エクサ回路増幅効果", val: 12.00, fixed: true, edit: true, on: true, imgUrl: "./images/kairo.png" },
-                    { label: "エクサチップオプション", val: 12.00, fixed: true, edit: true, on: true, imgUrl: "./images/chip.png" },
-                    { label: "アットマ上衣アクセ[固定効果]", val: 5.00, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
-                    { label: "レアバセット効果", val: 12.00, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png" },
-                    { label: "レアバ武器[固定効果]", val: 5.00, fixed: true, edit: true, on: true, imgUrl: "./images/reabuki.png" },
-                    { label: "レアバアクセ効果", val: 7.00, fixed: true, edit: true, on: true, imgUrl: "./images/zizoku.png" },
+                    { label: "オプション変換効果", val: 0, fixed: true, edit: true, on: true, imgUrl: "./images/buki.png" },
+                    { label: "エクサ回路増幅効果", val: 11.7, fixed: true, edit: true, on: true, imgUrl: "./images/kairo.png" },
+                    { label: "エクサチップオプション", val: 11, fixed: true, edit: true, on: true, imgUrl: "./images/chip.png" },
+                    { label: "アットマ上衣アクセ[固定効果]", val: 6, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
+                    { label: "レアバセット効果", val: 7.00, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png", desc: "エレボス3set=7%　ヴィタホン3set=7%　深淵2set=5％　猛虎防具set=5%　深淵防具set=10%" },
+                    { label: "レアバ武器[固定効果]", val: 0.00, fixed: true, edit: true, on: true, imgUrl: "./images/reabuki.png" },
+                    { label: "レアバアクセ[固定効果]", val: 7.00, fixed: true, edit: true, on: true, imgUrl: "./images/zizoku.png" },
                     { label: "レイド3点セット効果", val: 5.00, fixed: true, edit: false, on: true, imgUrl: "./images/set.png" },
                     { label: "リンクアバ効果", val: 2.00, fixed: true, edit: false, on: true, imgUrl: "./images/rinku.png" },
                     { label: "シナジー", val: 2.00, fixed: true, edit: false, on: true, imgUrl: "./images/shinagizizoku.png", desc: "歪曲された視線" },
@@ -1272,6 +1323,16 @@
             },
         ];
 
+        // ▼ ユーザープリセットデータ ▼
+        // たいやき次郎：現在の初期値をそのまま使用
+        const jiroStats = JSON.parse(JSON.stringify(defaultStatsData));
+
+        // ふゆるです：次郎と同じ内容で初期化
+        const fuyuruStats = JSON.parse(JSON.stringify(defaultStatsData));
+
+        // りかたん：次郎と同じ内容で初期化
+        const rikatanStats = JSON.parse(JSON.stringify(defaultStatsData));
+
         // ▼ グローバル状態管理 ▼
         let appState = {
             activeSet: 'A',
@@ -1304,11 +1365,11 @@
 
         // --- データ永続化 (LocalStorage) ---
         function saveState() {
-            localStorage.setItem('elsword_calc_state_v49', JSON.stringify(appState));
+            localStorage.setItem('elsword_calc_state_v57', JSON.stringify(appState));
         }
 
         function loadState() {
-            const saved = localStorage.getItem('elsword_calc_state_v49');
+            const saved = localStorage.getItem('elsword_calc_state_v57');
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
@@ -1403,6 +1464,34 @@
             render();
             calculate();
             closeCopyModal();
+        }
+
+        // --- プリセット読込機能 ---
+        function loadPreset(user) {
+            const names = { 'jiro': 'たいやき次郎', 'fuyuru': 'ふゆるです', 'rikatan': 'りかたん' };
+            const name = names[user] || user;
+            if (!confirm(name + ' のプリセットを読み込みますか？\n※現在の入力内容は上書きされます。')) return;
+
+            let sourceData;
+            if (user === 'jiro') sourceData = jiroStats;
+            else if (user === 'fuyuru') sourceData = fuyuruStats;
+            else if (user === 'rikatan') sourceData = rikatanStats;
+
+            // A/B両方のセットをそのユーザーの初期値でリセット
+            appState.sets.A = JSON.parse(JSON.stringify(sourceData));
+            appState.sets.B = JSON.parse(JSON.stringify(sourceData));
+
+            // 魔法石カウントもリセット
+            appState.stoneCounts = {
+                boss3: { A: 0, B: 0 },
+                skill2: { A: 0, B: 0 },
+                trans2: { A: 0, B: 0 },
+                trans25: { A: 0, B: 0 }
+            };
+
+            saveState();
+            render();
+            calculate();
         }
 
         // --- A/B 切り替え ---
