@@ -1324,8 +1324,47 @@
         ];
 
         // ▼ ユーザープリセットデータ ▼
-        // たいやき次郎：現在の初期値をそのまま使用
+        // たいやき次郎：カスタマイズされた初期値
         const jiroStats = JSON.parse(JSON.stringify(defaultStatsData));
+        // クリティカルダメージのカスタマイズ
+        const jiroCriDmg = jiroStats.find(cat => cat.id === 'cri_dmg');
+        if (jiroCriDmg) {
+            jiroCriDmg.items.find(i => i.label === 'ステータス表記').val = 212.5;
+            jiroCriDmg.items.find(i => i.label === '加算パッシブ').val = 20;
+            jiroCriDmg.items.find(i => i.label === '乗算パッシブ').val = 10;
+        }
+        // ボスダメージのカスタマイズ
+        const jiroBossDmg = jiroStats.find(cat => cat.id === 'boss_dmg');
+        if (jiroBossDmg) {
+            jiroBossDmg.items.find(i => i.label === '加算パッシブ').val = 20;
+            // 魔法石の値を設定（6個 × 3% = 18）
+            const bossStone = jiroBossDmg.items.find(i => i.stoneId === 'boss3');
+            if (bossStone) {
+                bossStone.val = 18;
+                bossStone.currentCount = 6;
+                bossStone.targetCount = 6;
+            }
+        }
+        // 全スキルダメージの魔法石カスタマイズ
+        const jiroAllSkill = jiroStats.find(cat => cat.id === 'all_skill');
+        if (jiroAllSkill) {
+            const skillStone = jiroAllSkill.items.find(i => i.stoneId === 'skill2');
+            if (skillStone) {
+                skillStone.val = 2;
+                skillStone.currentCount = 1;
+                skillStone.targetCount = 1;
+            }
+        }
+        // 強烈超越スキルダメージの魔法石カスタマイズ
+        const jiroTransSkill = jiroStats.find(cat => cat.id === 'trans_skill');
+        if (jiroTransSkill) {
+            const transStone = jiroTransSkill.items.find(i => i.stoneId === 'trans2');
+            if (transStone) {
+                transStone.val = 6;
+                transStone.currentCount = 3;
+                transStone.targetCount = 3;
+            }
+        }
 
         // ふゆるです：次郎と同じ内容で初期化
         const fuyuruStats = JSON.parse(JSON.stringify(defaultStatsData));
@@ -1481,13 +1520,24 @@
             appState.sets.A = JSON.parse(JSON.stringify(sourceData));
             appState.sets.B = JSON.parse(JSON.stringify(sourceData));
 
-            // 魔法石カウントもリセット
-            appState.stoneCounts = {
-                boss3: { A: 0, B: 0 },
-                skill2: { A: 0, B: 0 },
-                trans2: { A: 0, B: 0 },
-                trans25: { A: 0, B: 0 }
-            };
+            // 魔法石カウントの設定
+            if (user === 'jiro') {
+                // たいやき次郎の魔法石個数
+                appState.stoneCounts = {
+                    boss3: { A: 6, B: 6 },
+                    skill2: { A: 1, B: 1 },
+                    trans2: { A: 3, B: 3 },
+                    trans25: { A: 0, B: 0 }
+                };
+            } else {
+                // その他のプリセットは0にリセット
+                appState.stoneCounts = {
+                    boss3: { A: 0, B: 0 },
+                    skill2: { A: 0, B: 0 },
+                    trans2: { A: 0, B: 0 },
+                    trans25: { A: 0, B: 0 }
+                };
+            }
 
             saveState();
             render();
