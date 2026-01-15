@@ -356,7 +356,7 @@
             padding: 4px;
             text-align: right;
             font-weight: 700;
-            width: 100%;
+            width: 70px;
             font-size: 0.9rem;
             font-family: 'M PLUS Rounded 1c', sans-serif;
             transition: opacity 0.2s;
@@ -995,15 +995,8 @@
             margin-top: 2px;
         }
 
-        /* 魔法石項目のインデント表示 */
         .stone-row {
-            margin-left: 30px !important;
-            width: calc(100% - 30px) !important;
-            border-left: none !important;
-            padding-left: 0 !important;
-            background-color: transparent !important;
-            border-bottom: none !important;
-            margin-bottom: 2px !important;
+            padding-left: 35px;
         }
 
 
@@ -1189,7 +1182,7 @@
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
                     { label: "ステータス表記", val: 104.50, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
-                    { label: "内訳：力のアットマ魔法石", val: 0, stoneId: "skill2", unit: 2, imgUrl: "./images/ishitikara.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 }
+                    { label: "力のアットマ魔法石", val: 0, stoneId: "skill2", unit: 2, imgUrl: "./images/ishitikara.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 }
                 ]
             },
             {
@@ -1200,8 +1193,8 @@
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
                     { label: "ステータス表記", val: 122.00, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
-                    { label: "内訳：機敏のアットマ魔法石", val: 0, stoneId: "trans2", unit: 2, imgUrl: "./images/ishikibin.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
-                    { label: "内訳：知恵のアットマ魔法石", val: 0, stoneId: "trans25", unit: 2.5, imgUrl: "./images/ishitie.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
+                    { label: "機敏のアットマ魔法石", val: 0, stoneId: "trans2", unit: 2, imgUrl: "./images/ishikibin.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
+                    { label: "知恵のアットマ魔法石", val: 0, stoneId: "trans25", unit: 2.5, imgUrl: "./images/ishitie.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
                 ]
             },
             {
@@ -1274,7 +1267,7 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
-                    { label: "ソケット効果", val: 0, fixed: true, edit: false, on: true, imgUrl: "./images/hangeki.png" }
+                    { label: "ソケット効果", val: 0, fixed: true, edit: true, on: true, imgUrl: "./images/hangeki.png" }
                 ]
             },
         ];
@@ -1311,11 +1304,11 @@
 
         // --- データ永続化 (LocalStorage) ---
         function saveState() {
-            localStorage.setItem('elsword_calc_state_v48', JSON.stringify(appState));
+            localStorage.setItem('elsword_calc_state_v49', JSON.stringify(appState));
         }
 
         function loadState() {
-            const saved = localStorage.getItem('elsword_calc_state_v48');
+            const saved = localStorage.getItem('elsword_calc_state_v49');
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
@@ -2009,50 +2002,7 @@
 
         init();
 
-        /* ▼▼ 追加するスクリプト（v34） ▼▼ */
-        // 監視機能：リストが更新されたら即座に「個数」表示に書き換える
-        const stoneObserver = new MutationObserver(() => {
-            const rows = document.querySelectorAll('.stone-row');
-            if (rows.length === 0) return;
 
-            // 魔法石の並び順（データ定義順）
-            const stoneOrder = ['boss3', 'skill2', 'trans2', 'trans25'];
-
-            rows.forEach((row, index) => {
-                const stoneId = stoneOrder[index];
-                if (!stoneId) return;
-
-                // データ取得 (v37対応: stoneCountsとactiveSetから判断)
-                if (appState.stoneCounts && appState.stoneCounts[stoneId]) {
-                    const currentSet = appState.activeSet; // 'A' or 'B'
-                    const count = appState.stoneCounts[stoneId][currentSet];
-
-                    // v39修正: type="number" を明示的に探すか、すでに書き換えたクラスを持つものを探す
-                    let targetInput = row.querySelector('input[type="number"]');
-                    if (!targetInput) {
-                        targetInput = row.querySelector('input.stone-val-display');
-                    }
-
-                    if (targetInput) {
-                        // 書き換え処理
-                        targetInput.setAttribute('type', 'text');
-                        targetInput.classList.add('stone-val-display'); // 目印クラス付与
-                        targetInput.value = count + '個';
-
-                        // スタイル調整（青文字で強調）
-                        targetInput.style.color = '#00e5ff';
-                        targetInput.style.fontWeight = 'bold';
-                        targetInput.style.textAlign = 'right';
-                    }
-                }
-            });
-        });
-
-        // 監視を開始（#statsListの中身が変わるたびに実行）
-        const targetList = document.getElementById('statsList');
-        if (targetList) {
-            stoneObserver.observe(targetList, { childList: true, subtree: true });
-        }
     </script>
 
 </body>
