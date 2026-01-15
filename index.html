@@ -1057,7 +1057,8 @@
             background: #ffe082;
             color: #333;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            min-width: 140px;
+            min-width: 120px;
+            text-align: center;
         }
 
         .preset-btn:active {
@@ -1272,6 +1273,7 @@
                     { label: "レアバセット効果", val: 7.00, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png", desc: "エレボス3set=7%　ヴィタホン3set=7%　深淵2set=5％　猛虎防具set=5%　深淵防具set=10%" },
                     { label: "レアバ武器[固定効果]", val: 0.00, fixed: true, edit: true, on: true, imgUrl: "./images/reabuki.png" },
                     { label: "レアバアクセ[固定効果]", val: 7.00, fixed: true, edit: true, on: true, imgUrl: "./images/zizoku.png" },
+                    { label: "一般アクセ[追加効果]", val: 0, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
                     { label: "レイド3点セット効果", val: 5.00, fixed: true, edit: false, on: true, imgUrl: "./images/set.png" },
                     { label: "リンクアバ効果", val: 2.00, fixed: true, edit: false, on: true, imgUrl: "./images/rinku.png" },
                     { label: "シナジー", val: 2.00, fixed: true, edit: false, on: true, imgUrl: "./images/shinagizizoku.png", desc: "歪曲された視線" },
@@ -1286,6 +1288,7 @@
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
                     { label: "レアバセット効果", val: 10, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png" },
                     { label: "レアバ武器[固定効果]", val: 5, fixed: true, edit: false, on: true, imgUrl: "./images/reabuki.png" },
+                    { label: "一般アクセ[追加効果]", val: 0, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
                     { label: "アットマ上衣アクセ[固定効果]", val: 10, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
                 ]
             },
@@ -1297,7 +1300,8 @@
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
                     { label: "エクサ回路増幅効果", val: 10, fixed: true, edit: true, on: true, imgUrl: "./images/kairo.png" },
-                    { label: "エクサチップオプション", val: 5, fixed: true, edit: true, on: true, imgUrl: "./images/chip.png" }
+                    { label: "エクサチップオプション", val: 5, fixed: true, edit: true, on: true, imgUrl: "./images/chip.png" },
+                    { label: "シナジー", val: 2, fixed: true, edit: false, on: true, imgUrl: "./images/shinagi50koe.png", desc: "巨人審判者" }
                 ]
             },
             {
@@ -1308,7 +1312,8 @@
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
                     { label: "エクサ回路増幅効果", val: 10, fixed: true, edit: true, on: true, imgUrl: "./images/kairo.png" },
-                    { label: "エクサチップオプション", val: 5, fixed: true, edit: true, on: true, imgUrl: "./images/chip.png" }
+                    { label: "エクサチップオプション", val: 5, fixed: true, edit: true, on: true, imgUrl: "./images/chip.png" },
+                    { label: "シナジー", val: 2, fixed: true, edit: false, on: true, imgUrl: "./images/shinagi50ika.png", desc: "殴り合い" }
                 ]
             },
             {
@@ -1368,6 +1373,26 @@
                 transStone.targetCount = 3;
             }
         }
+        // HP100％以下の敵のカスタマイズ
+        const jiroHp100 = jiroStats.find(cat => cat.id === 'hp100_under');
+        if (jiroHp100) {
+            jiroHp100.items.find(i => i.label === 'レアバセット効果').val = 21;
+            jiroHp100.items.find(i => i.label === 'レアバ武器[固定効果]').val = 5;
+            jiroHp100.items.find(i => i.label === '一般アクセ[追加効果]').val = 1;
+            jiroHp100.items.find(i => i.label === 'アットマ上衣アクセ[固定効果]').val = 10;
+        }
+        // HP50％超過の敵のカスタマイズ
+        const jiroHp50Over = jiroStats.find(cat => cat.id === 'hp50_over');
+        if (jiroHp50Over) {
+            jiroHp50Over.items.find(i => i.label === 'エクサ回路増幅効果').val = 11.1;
+            jiroHp50Over.items.find(i => i.label === 'エクサチップオプション').val = 5;
+        }
+        // HP50％以下の敵のカスタマイズ
+        const jiroHp50Under = jiroStats.find(cat => cat.id === 'hp50_under');
+        if (jiroHp50Under) {
+            jiroHp50Under.items.find(i => i.label === 'エクサ回路増幅効果').val = 10.2;
+            jiroHp50Under.items.find(i => i.label === 'エクサチップオプション').val = 4;
+        }
 
         // ふゆるです：次郎と同じ内容で初期化
         const fuyuruStats = JSON.parse(JSON.stringify(defaultStatsData));
@@ -1407,11 +1432,11 @@
 
         // --- データ永続化 (LocalStorage) ---
         function saveState() {
-            localStorage.setItem('elsword_calc_state_v57', JSON.stringify(appState));
+            localStorage.setItem('elsword_calc_state_v59', JSON.stringify(appState));
         }
 
         function loadState() {
-            const saved = localStorage.getItem('elsword_calc_state_v57');
+            const saved = localStorage.getItem('elsword_calc_state_v59');
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
