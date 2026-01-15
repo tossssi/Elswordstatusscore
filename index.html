@@ -1422,8 +1422,136 @@
         // ふゆるです：次郎と同じ内容で初期化
         const fuyuruStats = JSON.parse(JSON.stringify(defaultStatsData));
 
-        // りかたん：次郎と同じ内容で初期化
+        // りかたん：カスタマイズされた初期値
         const rikatanStats = JSON.parse(JSON.stringify(defaultStatsData));
+
+        // 1. 物魔攻撃力(%)のカスタマイズ
+        const rikatanAtkPercent = rikatanStats.find(cat => cat.id === 'atk_percent');
+        if (rikatanAtkPercent) {
+            rikatanAtkPercent.items.find(i => i.label === 'オプション変換効果').val = 13;
+            rikatanAtkPercent.items.find(i => i.label === '武器魔力付与').val = 36.25;
+            rikatanAtkPercent.items.find(i => i.label === 'レアバセット効果').val = 6;
+            rikatanAtkPercent.items.find(i => i.label === 'レアバアクセ[固定効果]').val = 4;
+            rikatanAtkPercent.items.find(i => i.label === '一般アクセ[追加効果]').val = 1;
+            rikatanAtkPercent.items.find(i => i.label === 'エルコレ効果').val = 3.75;
+            rikatanAtkPercent.items.find(i => i.label === 'エクサ再錬効果').val = 8;
+        }
+
+        // 2. クリティカルダメージのカスタマイズ
+        const rikatanCriDmg = rikatanStats.find(cat => cat.id === 'cri_dmg');
+        if (rikatanCriDmg) {
+            rikatanCriDmg.items.find(i => i.label === 'ステータス表記').val = 228.5;
+            rikatanCriDmg.items.find(i => i.label === '加算パッシブ').val = 0;
+            rikatanCriDmg.items.find(i => i.label === '乗算パッシブ').val = 0;
+            rikatanCriDmg.items.find(i => i.label === 'アットマ草木セット効果').val = 26;
+            // 刻印をOFFに
+            const kokuin = rikatanCriDmg.items.find(i => i.label === '刻印');
+            if (kokuin) kokuin.on = false;
+        }
+
+        // 3. ボスに与えるダメージ増加のカスタマイズ
+        const rikatanBossDmg = rikatanStats.find(cat => cat.id === 'boss_dmg');
+        if (rikatanBossDmg) {
+            rikatanBossDmg.items.find(i => i.label === 'ステータス表記').val = 152.2;
+            rikatanBossDmg.items.find(i => i.label === '加算パッシブ').val = 0;
+            rikatanBossDmg.items.find(i => i.label === 'ギルドスキル').val = 2.5;
+            // 刻印はON（デフォルト）
+            // 狩りのデュアル魔法石の値を設定（13個 × 2.5% = 32.5）
+            const boss25Stone = rikatanBossDmg.items.find(i => i.stoneId === 'boss25');
+            if (boss25Stone) {
+                boss25Stone.val = 32.5;
+                boss25Stone.currentCount = 13;
+                boss25Stone.targetCount = 13;
+            }
+            // 力のアットマ魔法石は0個
+            const bossStone = rikatanBossDmg.items.find(i => i.stoneId === 'boss3');
+            if (bossStone) {
+                bossStone.val = 0;
+                bossStone.currentCount = 0;
+                bossStone.targetCount = 0;
+            }
+        }
+
+        // 4. 全てのスキルダメージ増加のカスタマイズ
+        const rikatanAllSkill = rikatanStats.find(cat => cat.id === 'all_skill');
+        if (rikatanAllSkill) {
+            rikatanAllSkill.items.find(i => i.label === 'ステータス表記').val = 105.75;
+            // 魔法石は0個
+            const skillStone = rikatanAllSkill.items.find(i => i.stoneId === 'skill2');
+            if (skillStone) {
+                skillStone.val = 0;
+                skillStone.currentCount = 0;
+                skillStone.targetCount = 0;
+            }
+        }
+
+        // 5. 強烈、超越スキルダメージ増加のカスタマイズ
+        const rikatanTransSkill = rikatanStats.find(cat => cat.id === 'trans_skill');
+        if (rikatanTransSkill) {
+            rikatanTransSkill.items.find(i => i.label === 'ステータス表記').val = 126.3;
+            // 機敏のアットマ魔法石（2個 × 2% = 4）
+            const trans2Stone = rikatanTransSkill.items.find(i => i.stoneId === 'trans2');
+            if (trans2Stone) {
+                trans2Stone.val = 4;
+                trans2Stone.currentCount = 2;
+                trans2Stone.targetCount = 2;
+            }
+            // 知恵のアットマ魔法石は0個
+            const trans25Stone = rikatanTransSkill.items.find(i => i.stoneId === 'trans25');
+            if (trans25Stone) {
+                trans25Stone.val = 0;
+                trans25Stone.currentCount = 0;
+                trans25Stone.targetCount = 0;
+            }
+        }
+
+        // 6. 両極化のカスタマイズ
+        const rikatanPolar = rikatanStats.find(cat => cat.id === 'polar');
+        if (rikatanPolar) {
+            rikatanPolar.items.find(i => i.label === 'ステータス表記').val = 37.3;
+        }
+
+        // 7. 持続ダメージのカスタマイズ
+        const rikatanDot = rikatanStats.find(cat => cat.id === 'dot');
+        if (rikatanDot) {
+            rikatanDot.items.find(i => i.label === 'オプション変換効果').val = 0;
+            rikatanDot.items.find(i => i.label === 'エクサ回路増幅効果').val = 10.7;
+            rikatanDot.items.find(i => i.label === 'エクサチップオプション').val = 14;
+            rikatanDot.items.find(i => i.label === 'アットマ上衣アクセ[固定効果]').val = 4;
+            rikatanDot.items.find(i => i.label === 'レアバセット効果').val = 12;
+            rikatanDot.items.find(i => i.label === 'レアバ武器[固定効果]').val = 5;
+            rikatanDot.items.find(i => i.label === 'レアバアクセ[固定効果]').val = 8;
+            rikatanDot.items.find(i => i.label === '一般アクセ[追加効果]').val = 0;
+        }
+
+        // 8. HP100％以下の敵のカスタマイズ
+        const rikatanHp100 = rikatanStats.find(cat => cat.id === 'hp100_under');
+        if (rikatanHp100) {
+            rikatanHp100.items.find(i => i.label === 'レアバセット効果').val = 10;
+            rikatanHp100.items.find(i => i.label === 'レアバ武器[固定効果]').val = 0;
+            rikatanHp100.items.find(i => i.label === '一般アクセ[追加効果]').val = 3.5;
+            rikatanHp100.items.find(i => i.label === 'アットマ上衣アクセ[固定効果]').val = 10;
+        }
+
+        // 9. HP50％超過の敵のカスタマイズ
+        const rikatanHp50Over = rikatanStats.find(cat => cat.id === 'hp50_over');
+        if (rikatanHp50Over) {
+            rikatanHp50Over.items.find(i => i.label === 'エクサ回路増幅効果').val = 0.7;
+            rikatanHp50Over.items.find(i => i.label === 'エクサチップオプション').val = 0;
+        }
+
+        // 10. HP50％以下の敵のカスタマイズ
+        const rikatanHp50Under = rikatanStats.find(cat => cat.id === 'hp50_under');
+        if (rikatanHp50Under) {
+            rikatanHp50Under.items.find(i => i.label === 'エクサ回路増幅効果').val = 9.6;
+            rikatanHp50Under.items.find(i => i.label === 'エクサチップオプション').val = 0;
+        }
+
+        // 11. HP30％以下の敵のカスタマイズ
+        const rikatanHp30 = rikatanStats.find(cat => cat.id === 'hp30');
+        if (rikatanHp30) {
+            rikatanHp30.items.find(i => i.label === 'ソケット効果').val = 0;
+        }
 
         // ▼ グローバル状態管理 ▼
         let appState = {
@@ -1584,6 +1712,15 @@
                     boss25: { A: 16, B: 16 },
                     skill2: { A: 1, B: 1 },
                     trans2: { A: 3, B: 3 },
+                    trans25: { A: 0, B: 0 }
+                };
+            } else if (user === 'rikatan') {
+                // りかたんの魔法石個数
+                appState.stoneCounts = {
+                    boss3: { A: 0, B: 0 },
+                    boss25: { A: 13, B: 13 },
+                    skill2: { A: 0, B: 0 },
+                    trans2: { A: 2, B: 2 },
                     trans25: { A: 0, B: 0 }
                 };
             } else {
