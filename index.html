@@ -1286,7 +1286,7 @@
                 calcType: "simple",
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
-                    { label: "レアバセット効果", val: 10, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png" },
+                    { label: "レアバセット効果", val: 10, fixed: true, edit: true, on: true, imgUrl: "./images/shinen.png", desc: "猛虎3set=6%　エレボス2set=5%　クレスト2set=4%　クレスト防具set=6%" },
                     { label: "レアバ武器[固定効果]", val: 5, fixed: true, edit: false, on: true, imgUrl: "./images/reabuki.png" },
                     { label: "一般アクセ[追加効果]", val: 0, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
                     { label: "アットマ上衣アクセ[固定効果]", val: 10, fixed: true, edit: true, on: true, imgUrl: "./images/attoma.png" },
@@ -1392,6 +1392,9 @@
         if (jiroHp50Under) {
             jiroHp50Under.items.find(i => i.label === 'エクサ回路増幅効果').val = 10.2;
             jiroHp50Under.items.find(i => i.label === 'エクサチップオプション').val = 4;
+            // シナジー（殴り合い）をOFFに
+            const shinagi = jiroHp50Under.items.find(i => i.label === 'シナジー');
+            if (shinagi) shinagi.on = false;
         }
 
         // ふゆるです：次郎と同じ内容で初期化
