@@ -1175,7 +1175,7 @@
                 items: [
                     { label: "基礎値(固定)", val: 100, fixed: true, edit: false, on: true, imgUrl: "./images/kotei.png" },
                     { label: "ステータス表記", val: 150.00, fixed: true, edit: true, on: true, imgUrl: "./images/sute.png" },
-                    { label: "内訳：力のアットマ魔法石", val: 0, stoneId: "boss3", unit: 3, imgUrl: "./images/ishitikara.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
+                    { label: "力のアットマ魔法石", val: 0, stoneId: "boss3", unit: 3, imgUrl: "./images/ishitikara.png", desc: "一番下のタブで調整", fixed: true, edit: false, on: true, currentCount: 0, targetCount: 0 },
                     { label: "加算パッシブ", val: 0.00, fixed: true, edit: true, on: true, imgUrl: "./images/kasanboss.png" },
                     { label: "ギルドスキル", val: 2.50, fixed: true, edit: true, on: true, imgUrl: "./images/guild.png" },
                     { label: "刻印", val: 5, fixed: true, edit: false, on: true, imgUrl: "./images/kokuin.png" },
@@ -1311,11 +1311,11 @@
 
         // --- データ永続化 (LocalStorage) ---
         function saveState() {
-            localStorage.setItem('elsword_calc_state_v39', JSON.stringify(appState));
+            localStorage.setItem('elsword_calc_state_v48', JSON.stringify(appState));
         }
 
         function loadState() {
-            const saved = localStorage.getItem('elsword_calc_state_v39');
+            const saved = localStorage.getItem('elsword_calc_state_v48');
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
@@ -1522,7 +1522,10 @@
             <div style="display:flex; flex-direction:column; gap:8px;">
                 <!-- Set A Control -->
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <label style="font-size:0.75rem; color:#aaa; font-weight:bold;">変更前(現在の装着個数)</label>
+                    <div style="line-height:1.2; text-align:left;">
+                        <div style="font-size:0.75rem; color:#ddd; font-weight:bold;">変更前</div>
+                        <div style="font-size:0.6rem; color:#888; margin-top: 4px;">(現在の装着個数)</div>
+                    </div>
                     <div style="display:flex; align-items:center; gap:3px;">
                         <button class="stone-ctrl-btn" onclick="updateStoneCount('${stone.id}', 'A', ${countA - 1})">-</button>
                         <input type="number" class="stone-num-input" value="${countA}" min="0" 
@@ -1533,7 +1536,10 @@
 
                 <!-- Set B Control -->
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <label style="font-size:0.75rem; color:#fff; font-weight:bold;">変更後</label>
+                    <div style="line-height:1.2; text-align:left;">
+                        <div style="font-size:0.75rem; color:#fff; font-weight:bold;">変更後</div>
+                        <div style="font-size:0.6rem; color:#888; margin-top: 4px;">(目標装着個数)</div>
+                    </div>
                     <div style="display:flex; align-items:center; gap:3px;">
                         <button class="stone-ctrl-btn" onclick="updateStoneCount('${stone.id}', 'B', ${countB - 1})">-</button>
                         <input type="number" class="stone-num-input" value="${countB}" min="0" 
